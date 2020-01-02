@@ -1,9 +1,11 @@
 import App from 'next/app'
 import 'antd/dist/antd.css'
 import React from 'react'
+import { Provider } from 'react-redux'
 import Layout from '../components/Layout'
-
-export default class MyApp extends App {
+import initializeStore from '../store/store'
+import withRedux from '../lib/with-redux-app'
+class MyApp extends App {
   // App组件的getInitialProps比较特殊
   // 能拿到一些额外的参数
   // Component: 被包裹的组件
@@ -13,7 +15,7 @@ export default class MyApp extends App {
 
     // 拿到Component上定义的getInitialProps
     if (Component.getInitialProps) {
-      // 执行拿到返回结果
+      // 执行拿到返回结果`
       pageProps = await Component.getInitialProps(ctx)
     }
 
@@ -24,11 +26,16 @@ export default class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps } = this.props
+    const { Component, pageProps, reduxStore } = this.props
     return (
         <Layout>
-          <Component {...pageProps} />
+          <Provider store={reduxStore}>
+            {/* 把pageProps解构后传递给组件 */}
+            <Component {...pageProps} />
+          </Provider>
         </Layout>
     )
   }
 }
+
+export default withRedux(MyApp)

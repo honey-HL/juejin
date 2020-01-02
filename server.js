@@ -15,6 +15,7 @@ server.use(proxy('/api', {
     changeOrigin: true,
     secure: false,
     pathRewrite: {'^/api' : ''},
+    logLevel: 'debug'
 }))
 
 
