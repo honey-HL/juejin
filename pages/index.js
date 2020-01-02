@@ -10,7 +10,7 @@ import {
 import { withRouter } from 'next/router'
 
 const { Header, Content, Footer } = Layout
-const Index = ({ count, add ,goldList}) => {
+const Index = ({ goldList }) => {
   console.log('14  goldList==>',goldList)
   return (
     <Layout>
@@ -47,7 +47,7 @@ Index.getInitialProps = async ({ reduxStore }) => {
     const goldList = await reduxStore.dispatch(getGoldList())
     console.log('46==goldList',goldList)
     return {
-      goldList
+      goldList: goldList
     }
   }
   }
