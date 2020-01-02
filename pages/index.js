@@ -42,7 +42,7 @@ const Index = ({ goldList }) => {
 Index.getInitialProps = async ({ reduxStore }) => {
    // const res = await fetch('https://api.tvmaze.com/search/shows?q=batman');
   //   const data = await res.json();
-  console.log('state==>',reduxStore.getState())
+    console.log('state==>',reduxStore.getState())
   if (!reduxStore.getState().index.goldList.length) {
     const goldList = await reduxStore.dispatch(getGoldList())
     console.log('46==goldList',goldList)
@@ -50,7 +50,7 @@ Index.getInitialProps = async ({ reduxStore }) => {
       goldList: goldList
     }
   }
-  }
+}
 
 // export default 
 
