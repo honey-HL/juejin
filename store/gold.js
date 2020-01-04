@@ -37,6 +37,8 @@ export const getGoldList = server => { // https://extension-ms.juejin.im/resourc
 const defaultState = {
     goldList: [],
 }
+
+
 export default (state = defaultState, action) => {
     switch(action.type){
         case GET_LIST:

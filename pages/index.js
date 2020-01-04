@@ -3,17 +3,16 @@ import Router from 'next/router'
 import axios from 'axios'
 import store from '../store/store'
 import { connect } from 'react-redux'
-import {getGoldList} from '../store/index'
+import {getGoldList} from '../store/gold'
 import {Layout,List,} from 'antd'
 import LeftContainer from '../components/LeftContainer'
 import { withRouter } from 'next/router'
 
 const { Header, Content, Footer } = Layout
 const Index = ({ goldList }) => {
-  console.log('14  goldList==>',goldList)
   return (
     <div className='root'>
-      <LeftContainer></LeftContainer>
+      <LeftContainer goldList={goldList}></LeftContainer>
     {/* <List
         itemLayout="horizontal"
         dataSource={goldList}
@@ -100,12 +99,9 @@ const Index = ({ goldList }) => {
 }
 
 Index.getInitialProps = async ({ reduxStore }) => {
-   // const res = await fetch('https://api.tvmaze.com/search/shows?q=batman');
-  //   const data = await res.json();
-    console.log('state==>',reduxStore.getState())
-  if (!reduxStore.getState().index.goldList.length) {
+  if (!reduxStore.getState().gold.goldList.length) {
     const goldList = await reduxStore.dispatch(getGoldList())
-    console.log('46==goldList',goldList)
+    console.log('index.js-----------')
     return {
       goldList: goldList
     }

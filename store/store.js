@@ -1,15 +1,15 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import ReduxThunk from 'redux-thunk'
-import indexReducer from './index';
+import goldReducer from './gold';
 
 const reducer = combineReducers({
-    index: indexReducer
+    gold: goldReducer
 }) 
 
 export default function initializeStore(state) {
   const store = createStore(
     reducer,
-    // Object.assign({}, initialState, state),
+    // Object.assign({}, defaultState, state),
     applyMiddleware(ReduxThunk)
   )
   return store
