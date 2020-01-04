@@ -178,10 +178,12 @@ const HeaderContainer = () => (
         flex-direction: row;
     }
         .search-input {
-            flex: 0.816 0 auto;
+            display:flex;
+            flex: 1.6 0 auto;
             margin: 0 2.2rem 0 1rem;
             height: 100%;
-            padding: 1rem 0;
+            padding: 0.8rem 0;
+            border-radius: 2px;
         }
         .input {
             width: 52.8%;
@@ -191,6 +193,8 @@ const HeaderContainer = () => (
             border: 1px solid #e6edf4;
             border-radius: 2px;
             background-color: #f1f5fa;
+            outline: none;
+            // outline: 1px solid #3281f7;
         }
         .logo{
             display: block;
