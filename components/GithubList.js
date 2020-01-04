@@ -26,7 +26,7 @@ const GithubList = ({ githubList }) => {
                                        
                                    </div>
                                    <div className="repo-desc">
-                                        <div className="desc" title={item.description}>{item.description}</div>
+                                        <div className="desc" title={item.description}>{item.description !== ''?item.description:'No description provided.'}</div>
                                    </div>
                                    <div className="repo-meta">
                                         <span className="star">
@@ -55,6 +55,9 @@ const GithubList = ({ githubList }) => {
             width: 12px;
             height: 12px;
             border-radius: 50%;
+        }
+        .repo-meta .icon{
+            margin-right: 5px;
         }
           .repo-meta>span:not(:last-child) {
                 margin-right: 25px;
