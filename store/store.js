@@ -1,9 +1,11 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import ReduxThunk from 'redux-thunk'
 import goldReducer from './gold';
+import githubReducer from './github'
 
 const reducer = combineReducers({
-    gold: goldReducer
+    gold: goldReducer,
+    github: githubReducer
 }) 
 
 export default function initializeStore(state) {

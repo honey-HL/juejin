@@ -18,7 +18,7 @@ const GoldNav = () => (
             </ul> */}
         </div>
        
-    <style jsx>{`
+    <style jsx global>{`
     .curr {
         height: 100%;
         display: -ms-flexbox;
@@ -44,7 +44,7 @@ const GoldNav = () => (
             margin-right: .8rem!important;
             margin: 0 0 1.2rem;
             position: absolute;
-            width: 100%;
+            // width: 100%;
             top: 0;
             // background:red;
         }

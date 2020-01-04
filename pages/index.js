@@ -4,15 +4,19 @@ import axios from 'axios'
 import store from '../store/store'
 import { connect } from 'react-redux'
 import {getGoldList} from '../store/gold'
+import {getGithubList} from '../store/github'
 import {Layout,List,} from 'antd'
 import LeftContainer from '../components/LeftContainer'
+import RightContainer from '../components/RightContainer'
 import { withRouter } from 'next/router'
 
 const { Header, Content, Footer } = Layout
-const Index = ({ goldList }) => {
+const Index = ({ goldList, githubList }) => {
   return (
     <div className='root'>
       <LeftContainer goldList={goldList}></LeftContainer>
+      {/* <div>dwqwd</div> */}
+      <RightContainer githubList={githubList}></RightContainer>
     {/* <List
         itemLayout="horizontal"
         dataSource={goldList}
@@ -47,7 +51,18 @@ const Index = ({ goldList }) => {
           </script>
       <style jsx global>
         {`
-       
+        .source {
+          position: relative;
+          display: -ms-flexbox;
+          display: flex;
+          -ms-flex-direction: column;
+          flex-direction: column;
+          cursor: default;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+        }
         .big-header{
           position:absolute;
           top:0;
@@ -86,6 +101,7 @@ const Index = ({ goldList }) => {
             display:flex;
             flex-direction:row;
             background:#edeff1;
+            width: 100%;
           }
 
           .ant-layout-header {
@@ -99,11 +115,13 @@ const Index = ({ goldList }) => {
 }
 
 Index.getInitialProps = async ({ reduxStore }) => {
-  if (!reduxStore.getState().gold.goldList.length) {
+  if (!reduxStore.getState().gold.goldList.length && !reduxStore.getState().github.githubList.length) {
     const goldList = await reduxStore.dispatch(getGoldList())
+    const githubList = await reduxStore.dispatch(getGithubList())
     console.log('index.js-----------')
     return {
-      goldList: goldList
+      goldList: goldList,
+      githubList: githubList
     }
   }
 }

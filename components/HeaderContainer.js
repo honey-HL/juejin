@@ -56,7 +56,7 @@ const HeaderContainer = () => (
                     <div className="icon"></div>
                 </div>
         
-        <style jsx>{`
+        <style jsx global>{`
         .download-button .title {
             position: relative;
             padding-left: 5px;
