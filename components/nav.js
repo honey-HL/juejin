@@ -1,56 +1,27 @@
 import React from 'react'
-import Link from 'next/link'
+// import Link from 'next/link'
 
-const links = [
-  { href: 'https://zeit.co/now', label: 'ZEIT' },
-  { href: 'https://github.com/zeit/next.js', label: 'GitHub' },
-].map(link => {
-  link.key = `nav-link-${link.href}-${link.label}`
-  return link
-})
 
 const Nav = () => (
-  <nav>
-    <ul>
-      <li>
-        <Link href="/">
-          <a>Home</a>
-        </Link>
-      </li>
-      {links.map(({ key, href, label }) => (
-        <li key={key}>
-          <a href={href}>{label}</a>
-        </li>
-      ))}
-    </ul>
+  <div className='source-navbar'>
+    
 
     <style jsx>{`
-      :global(body) {
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, Avenir Next, Avenir,
-          Helvetica, sans-serif;
-      }
-      nav {
-        text-align: center;
-      }
-      ul {
+    .source-navbar, .source-navbar .source-box {
+        display: -ms-flexbox;
         display: flex;
-        justify-content: space-between;
-      }
-      nav > ul {
-        padding: 4px 16px;
-      }
-      li {
-        display: flex;
-        padding: 6px 8px;
-      }
-      a {
-        color: #067df7;
-        text-decoration: none;
-        font-size: 13px;
+        align-items: center;
+        min-height: 3.5rem;
+      background-color: #fff;
+      border-radius: 2px;
+      z-index: 250;
+      margin-right: .8rem!important;
+    }
+  .source .source-navbar {
+    margin: 0 0 1.2rem;
       }
     `}</style>
-  </nav>
+  </div>
 )
 
 export default Nav
