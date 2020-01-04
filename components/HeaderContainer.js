@@ -181,7 +181,6 @@ const HeaderContainer = () => (
             display:flex;
             flex: 1.6 0 auto;
             margin: 0 2.2rem 0 1rem;
-            height: 100%;
             padding: 0.8rem 0;
             border-radius: 2px;
         }
