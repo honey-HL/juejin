@@ -29,6 +29,13 @@ const changeCategory = (item) => {
 
 const GithubNav = (props) => {
     console.log(props)
+    props.dispatch(getGithubList({
+        category: "upcome",
+        period: "day",
+        lang: "javascript",
+        offset: 0,
+        limit: 30
+    }))
     
     return (
         <div className='source-navbar'>
@@ -215,10 +222,4 @@ const GithubNav = (props) => {
 
 
 export default withRouter(
-    connect(
-    state => ({
-        githubList: state.github.githubList
-        // goldList: state.gold.goldList,
-        // getGithubList: state.github.getGithubList
-    })
-  )(GithubNav))
+    connect()(GithubNav))
