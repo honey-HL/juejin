@@ -136,6 +136,7 @@ const GoldList = ({ goldList }) => {
               bottom: 0;
               overflow: auto;
               width:inherit;
+              padding-right: .8rem;
           }
           `}</style>
         </div>

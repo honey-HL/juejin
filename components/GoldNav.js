@@ -21,8 +21,80 @@ const GoldNav = (props) => {
                     </li>
                 </ul> */}
             </div>
+            <div className="category-box">
+                <div className="category-selector">
+                    <div className="title">前端</div>
+                    <div className="arrow-box">
+                        <img src='arrow-down.png' className="arrow-down"/>
+                    </div>
+                </div>
+            </div>
+            <div className="order-selector">
+                <div className="hottest active">热门</div>
+                <div className="latest">最新</div>
+            </div>
            
         <style jsx global>{`
+        .hottest, .latest {
+            display: inline-block;
+            margin: 0 .1rem;
+            width: 3.6rem;
+            height: 3.5rem;
+            font-size: 1.25rem;
+            text-align: center;
+            line-height: 3.5rem;
+            color: #646c7b;
+            opacity: .3;
+            cursor: pointer;
+        }
+        .hottest, .latest {
+            display: inline-block;
+            margin: 0 .1rem;
+            width: 3.6rem;
+            height: 3.5rem;
+            font-size: 1.25rem;
+            text-align: center;
+            line-height: 3.5rem;
+            color: #646c7b;
+            opacity: .3;
+            cursor: pointer;
+        }
+        .hottest.active {
+            opacity: .8;
+        }
+        .source-navbar .order-selector {
+            margin-right: .8rem;
+        }
+        .curr .title {
+            margin: 0 1rem 0 0;
+            opacity: 1;
+        }
+        .category-selector .title{
+            -ms-flex-positive: 1;
+            flex-grow: 1;
+            margin: 0 0 0 1rem;
+            opacity: .8;
+        }
+        .category-selector {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-align: center;
+            align-items: center;
+            position: relative;
+            width: 8rem;
+            height: 2.5rem;
+            border-radius: 2px;
+            color: #646c7b;
+            background-color: #f8f9fb;
+            cursor: pointer;
+        }
+        .category-box {
+            -ms-flex-positive: 1;
+            flex-grow: 1;
+        }
+        .icon {
+            margin: 0 1rem 0 .4rem;
+        }
         .curr {
             height: 100%;
             display: -ms-flexbox;
@@ -45,6 +117,8 @@ const GoldNav = (props) => {
                 background-color: #fff;
                 border-radius: 2px;
                 z-index: 250;
+            }
+            .source-navbar {
                 margin-right: .8rem!important;
             }
         `}</style>

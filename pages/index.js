@@ -104,11 +104,6 @@ console.log(props.store.getState())
           min-height: 100%;
           background-color: #eceff1;
         }
-        .entry-list {
-          position: relative;
-          padding-right: .8rem;
-          flex: 1 1 auto;
-      }
         html,body,#__next{
           margin: 0;
           padding: 0;
