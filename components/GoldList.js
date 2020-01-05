@@ -1,8 +1,5 @@
 import React from 'react'
-// import Link from 'next/link'
-import {getGoldList} from '../store/gold'
-import store from '../store/store'
-const {reduxStore} = store;
+import { connect } from 'react-redux'
 
 const GoldList = ({ goldList }) => {
     // console.log('store==>', reduxStore)
@@ -144,16 +141,11 @@ const GoldList = ({ goldList }) => {
 }
 
 
-GoldList.getInitialProps = async ({ reduxStore }) => {
-    console.log('没走components-----------')
-    //  console.log('state==>',reduxStore.getState())
-//    if (!reduxStore.getState().gold.goldList.length) {
-//      const goldList = await reduxStore.dispatch(getGoldList())
-//      console.log('46==goldList',goldList)
-//      return {
-//        goldList: goldList
-//      }
-//    }
- }
+export default
+    connect(
+    state => ({
+        goldList: state.gold.goldList,
+    }),
+  )(GoldList)
 
-export default GoldList
+// export default GoldList

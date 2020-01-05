@@ -38,7 +38,7 @@ console.log(props.store.getState())
   // console.log('props ==>',props.store.getState().github.githubList)
   return (
     <div className='root'>
-      <LeftContainer goldList={props.goldList} reduxStore></LeftContainer>
+      <LeftContainer></LeftContainer>
       {/* <div>dwqwd</div> */}
       <RightContainer></RightContainer>
     {/* <List
