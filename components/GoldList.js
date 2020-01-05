@@ -14,7 +14,7 @@ const GoldList = (store) => {
     console.log(_container.scrollHeight)
     console.log(_container.scrollTop + _container.clientHeight)
     console.log(_container.scrollTop)
-    if (_container.scrollTop + _container.clientHeight  + 1 === _container.scrollHeight) {
+    if (_container.scrollTop + _container.clientHeight  + 1 >= _container.scrollHeight) {
       console.log('come on')
       setOffset(offset + 30)
       let goldData = {
