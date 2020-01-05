@@ -9,6 +9,9 @@ export default ({ children, renderer = <div /> }) => {
       })}
       <style jsx global>
         {`
+        ul, li {
+          list-style:none;
+        }
           .center-container {
             flex: 1 1 auto;
             display: -ms-flexbox;
@@ -16,7 +19,6 @@ export default ({ children, renderer = <div /> }) => {
             position: relative;
             padding: 1.8rem 1.2rem 0 1.8rem;
             height: 100%;
-            // background: red;
           }
         `}
       </style>

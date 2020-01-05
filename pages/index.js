@@ -4,19 +4,34 @@ import axios from 'axios'
 import store from '../store/store'
 import { connect } from 'react-redux'
 import {getGoldList} from '../store/gold'
-import {getGithubList} from '../store/github'
+// import {getGithubList} from '../store/github'
 import {Layout,List,} from 'antd'
 import LeftContainer from '../components/LeftContainer'
 import RightContainer from '../components/RightContainer'
 import { withRouter } from 'next/router'
+import { getGithubList } from '../lib/api'
+
 
 const { Header, Content, Footer } = Layout
-const Index = ({ goldList, githubList }) => {
+const Index = (props) => { // {goldList, githubList, reduxStore}
+console.log(props.store.getState())
+  // console.log(githubList)
+  // console.log(store.github)
+  // console.log(typeof props.router.components.get('/'))
+  // let githubList = []
+  // for (let i in props.router.components) {
+  //   if (i === '/') {
+  //    githubList = props.router.components[i].props.initialReduxState.github.githubList
+  //   }
+  //   console.log(githubList)
+  //   console.log(props.router.components[i])
+  // }
+  // console.log('props ==>',props.store.getState().github.githubList)
   return (
     <div className='root'>
-      <LeftContainer goldList={goldList}></LeftContainer>
+      {/* <LeftContainer goldList={goldList} reduxStore></LeftContainer> */}
       {/* <div>dwqwd</div> */}
-      <RightContainer githubList={githubList}></RightContainer>
+      {/* <RightContainer  githubList={githubList}></RightContainer> */}
     {/* <List
         itemLayout="horizontal"
         dataSource={goldList}
@@ -90,6 +105,7 @@ const Index = ({ goldList, githubList }) => {
           padding: 0;
           height:100%;
           overflow: hidden;
+          font-size:12px;
         }
           html {
             font-size: 12px;
@@ -115,21 +131,42 @@ const Index = ({ goldList, githubList }) => {
 }
 
 Index.getInitialProps = async ({ reduxStore }) => {
+    let githubData = {
+      category: "trending",
+      period: "day",
+      lang: "javascript",
+      offset: 0,
+      limit: 30
+    }
   if (!reduxStore.getState().gold.goldList.length && !reduxStore.getState().github.githubList.length) {
     const goldList = await reduxStore.dispatch(getGoldList())
-    const githubList = await reduxStore.dispatch(getGithubList())
+    const githubList = await getGithubList(githubData)
+    await reduxStore.dispatch({type: 'INDEX/GITHUB',data: githubList})
+    console.log(reduxStore.getState().github.githubList)
+    // const githubList = await reduxStore.dispatch(getGithubList(githubData))
     console.log('index.js-----------')
-    return {
-      goldList: goldList,
-      githubList: githubList
-    }
+    // return {
+    //   goldList: goldList,
+    //   githubList: reduxStore.getState().github.githubList
+    // }
   }
 }
 
-export default Index
+export default withRouter(
+  connect(
+  state => ({
+    goldList: state.gold.goldList,
+    githubList: state.github.githubList
+  })
+)(Index))
 
-// export default withRouter(
+
+// export default
 //   connect(
-//   state => ({goldList: state.index.goldList}),
-//   {getGoldList}
-// )(Index))
+//   state => ({
+//     goldList: state.gold.goldList,
+//     githubList: state.github.githubList
+//   })
+// )(Index)
+
+// export default Index

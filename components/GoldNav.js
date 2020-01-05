@@ -37,20 +37,12 @@ const GoldNav = () => (
             display: -ms-flexbox;
             display: flex;
             align-items: center;
-            height:42px;
+            min-height:42px;
             background-color: #fff;
             border-radius: 2px;
             z-index: 250;
             margin-right: .8rem!important;
-            margin: 0 0 1.2rem;
-            position: absolute;
-            // width: 100%;
-            top: 0;
-            // background:red;
         }
-        .source .source-navbar {
-            margin: 0 0 1.2rem;
-      }
     `}</style>
   </div>
 )

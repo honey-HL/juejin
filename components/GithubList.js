@@ -1,10 +1,22 @@
 import React from 'react'
-// import Link from 'next/link'
+import { connect } from 'react-redux'
 import {getGoldList} from '../store/gold'
 import store from '../store/store'
-const {reduxStore} = store;
+import { withRouter } from 'next/router'
 
-const GithubList = ({ githubList }) => {
+const GithubList = (props) => {
+    // console.log(githubList)
+    // console.log('store in githublist', store.getState())
+    // console.log('reduxStore==>', reduxStore)
+    // console.log('props ==>',props.)
+    let githubList = []
+  for (let i in props.router.components) {
+    if (i === '/') {
+        githubList = props.router.components[i].props.initialReduxState.github.githubList
+    }
+    console.log(githubList)
+    console.log(props.router.components[i])
+  }
     return (
   
         <div className="github-scroll-container">
@@ -168,4 +180,12 @@ const GithubList = ({ githubList }) => {
 }
 
 
-export default GithubList
+// export default GithubList
+
+
+export default withRouter(
+    connect(
+    state => ({
+      githubList: state.github.githubList
+    })
+  )(GithubList))

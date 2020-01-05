@@ -1,5 +1,6 @@
 // import fetch from 'isomorphic-unfetch';
 import axios from 'axios'
+// import getGithubList from '../lib/api'
 // import fetch from 'node-fetch';
 
 // actionType
@@ -8,31 +9,24 @@ const GET_LIST = 'INDEX/GITHUB';
 
 
 // actionCreator
-const updatedGoldList = data => ({
+export const updatedGoldList = data => ({
     type: GET_LIST,
     data
 })
 
 
-export const getGithubList = server => { // https://extension-ms.juejin.im/resources/gold
-    let postData = {
-        category: "trending",
-        period: "day",
-        lang: "javascript",
-        offset: 0,
-        limit: 30
-    }
-    return (dispatch, getState, $axios) => { // https://api.tvmaze.com/search/shows?q=batman
-        return axios.post('http://localhost:3008/api/resources/github', postData)
-        .then(res => {
-            // console.log('res=>',res)
-            const githubList = res.data.data;
-            console.log(`Show data fetched. Count: ${githubList.length}`);
-            dispatch(updatedGoldList(githubList))
-            return githubList
-        })
-    }
-}
+// export const getGithubList = postData => { // https://extension-ms.juejin.im/resources/gold
+//     return (dispatch, getState, $axios) => { // https://api.tvmaze.com/search/shows?q=batman
+//         return axios.post('http://localhost:3008/api/resources/github', postData)
+//         .then(res => {
+//             // console.log('res=>',res)
+//             const githubList = res.data.data;
+//             console.log(`Show data fetched. Count: ${githubList.length}`);
+//             // dispatch(updatedGoldList(githubList))
+//             return githubList
+//         })
+//     }
+// }
 
 
 const defaultState = {
@@ -41,9 +35,10 @@ const defaultState = {
 
 
 export default (state = defaultState, action) => {
+    console.log('action==>',action)
     switch(action.type){
         case GET_LIST:
-            // console.log('action==>',action, state)
+            console.log('action==>',action, state)
             const newState = {
                 ...state,
                 githubList: action.data

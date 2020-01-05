@@ -3,7 +3,8 @@ import GithubNav from '../components/GithubNav'
 import GithubList from '../components/GithubList'
 
 
-const RightContainer = ({ githubList }) => {
+const RightContainer = ({ githubList, reduxStore }) => {
+  console.log(githubList)
     return(
       <div className='source other-source'>
           <GithubNav></GithubNav>

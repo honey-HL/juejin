@@ -31,7 +31,7 @@ class MyApp extends App {
         <Layout>
           <Provider store={reduxStore}>
             {/* 把pageProps解构后传递给组件 */}
-            <Component {...pageProps} />
+            <Component store={reduxStore} {...pageProps} />
           </Provider>
         </Layout>
     )
