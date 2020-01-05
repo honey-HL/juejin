@@ -14,13 +14,13 @@ const updatedGoldList = data => ({
 })
 
 
-export const getGoldList = server => { // https://extension-ms.juejin.im/resources/gold
-    let postData = {
-        category: "frontend",
-        order: "heat",
-        offset: 0,
-        limit: 30
-    }
+export const getGoldList = postData => { // https://extension-ms.juejin.im/resources/gold
+    // let postData = {
+    //     category: "frontend",
+    //     order: "heat",
+    //     offset: 0,
+    //     limit: 30
+    // }
     return (dispatch, getState, $axios) => { // https://api.tvmaze.com/search/shows?q=batman
         return axios.post('http://localhost:3008/api/resources/gold', postData)
         .then(res => {

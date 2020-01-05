@@ -1,72 +1,20 @@
-import Link from 'next/link'
-import Router from 'next/router'
-import axios from 'axios'
-import store from '../store/store'
 import { connect } from 'react-redux'
 import {getGoldList} from '../store/gold'
 import {getGithubList} from '../store/github'
-import {Layout,List,} from 'antd'
 import LeftContainer from '../components/LeftContainer'
 import RightContainer from '../components/RightContainer'
 import { withRouter } from 'next/router'
-// import { getGithubList } from '../lib/api'
-// import {updatedGoldList} from '../store/github'
 
-const { Header, Content, Footer } = Layout
+
 const Index = (props) => { // {goldList, githubList, reduxStore}
-console.log(props)
-console.log(props.store.getState())
-  // console.log(githubList)
-  // props.store.dispatch(props.githubList)
-  // console.log(store)
-  // debugger
-  // console.log(store.dispatch)
-  // console.log(reduxStore)
-  // reduxStore.dispatch({type: 'INDEX/GITHUB',data: githubList})
-  // console.log(store.getState())
-  // console.log(githubList)
-  // console.log(store.github)
-  // console.log(typeof props.router.components.get('/'))
-  // let githubList = []
-  // for (let i in props.router.components) {
-  //   if (i === '/') {
-  //    githubList = props.router.components[i].props.initialReduxState.github.githubList
-  //   }
-  //   console.log(githubList)
-  //   console.log(props.router.components[i])
-  // }
-  // console.log('props ==>',props.store.getState().github.githubList)
+
+  console.log(props)
+  console.log(props.store.getState())
+
   return (
     <div className='root'>
       <LeftContainer></LeftContainer>
-      {/* <div>dwqwd</div> */}
       <RightContainer></RightContainer>
-    {/* <List
-        itemLayout="horizontal"
-        dataSource={goldList}
-        renderItem={item => (
-          <List.Item>
-            <List.Item.Meta
-              title={<a href="https://ant.design">{item.title}</a>}
-            />
-          </List.Item>
-        )}
-      /> */}
-      {/* <div className="entry-list">
-        <List 
-          className="list-container"
-            // style={{transform: 'translate(0px, -80px) translateZ(0px)'}}
-            itemLayout="horizontal"
-            dataSource={goldList}
-            renderItem={item => (
-              <List.Item>
-                <List.Item.Meta
-                  title={<a href="https://ant.design">{item.title}</a>}
-                />
-              </List.Item>
-            )}
-          />
-      </div> */}
           <script type="javascript/text">
              {
               //  console.log(window)
@@ -144,14 +92,15 @@ Index.getInitialProps = async ({reduxStore}) => {
       offset: 0,
       limit: 30
     }
-    console.log('reduxStore==>',reduxStore)
+    let goldData = {
+      category: "frontend",
+      order: "heat",
+      offset: 0,
+      limit: 30
+  }
   if (!reduxStore.getState().gold.goldList.length && !reduxStore.getState().github.githubList.length) {
-    const goldList = await reduxStore.dispatch(getGoldList())
+    const goldList = await reduxStore.dispatch(getGoldList(goldData))
     const githubList = await reduxStore.dispatch(getGithubList(githubData))
-    // const githubList = await getGithubList(githubData)
-    // await reduxStore.dispatch({type: 'INDEX/GITHUB',data: githubList})
-    // console.log(reduxStore.getState().github.githubList)
-    // const githubList = await reduxStore.dispatch(getGithubList(githubData))
     console.log('index.js-----------')
     return {
       goldList: goldList,
