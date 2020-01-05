@@ -15,8 +15,10 @@ const categoryList = [{
     category: "upcome"
 }]
 
-const changeCategory = (item) => {
-    console.log(getGithubList)
+
+
+const changeCategory = (item, props) => {
+    console.log(props)
     let githubData = {
         category: item.category,
         period: "day",
@@ -24,18 +26,12 @@ const changeCategory = (item) => {
         offset: 0,
         limit: 30
     }
-    getGithubList(githubData)
+    props.dispatch(getGithubList(githubData))
 }
 
+
+
 const GithubNav = (props) => {
-    console.log(props)
-    props.dispatch(getGithubList({
-        category: "upcome",
-        period: "day",
-        lang: "javascript",
-        offset: 0,
-        limit: 30
-    }))
     
     return (
         <div className='source-navbar'>
@@ -57,7 +53,7 @@ const GithubNav = (props) => {
                     <ul className="list">
                         {
                             categoryList.map((item) => <li 
-                            onClick={e => changeCategory(item)}
+                            onClick={e => changeCategory(item, props)}
                             key ={item.id} className="item">
                                 <span className="title">{item.name}</span>
                         </li>)
