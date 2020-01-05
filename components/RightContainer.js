@@ -3,12 +3,12 @@ import GithubNav from '../components/GithubNav'
 import GithubList from '../components/GithubList'
 
 
-const RightContainer = ({ githubList, reduxStore }) => {
-  console.log(githubList)
+const RightContainer = () => {
+  // console.log(githubList)
     return(
       <div className='source other-source'>
           <GithubNav></GithubNav>
-          <GithubList githubList={githubList}></GithubList>
+          <GithubList></GithubList>
         <style jsx>{`
         .other-source {
             margin-left: 1.2rem;

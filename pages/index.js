@@ -4,17 +4,26 @@ import axios from 'axios'
 import store from '../store/store'
 import { connect } from 'react-redux'
 import {getGoldList} from '../store/gold'
-// import {getGithubList} from '../store/github'
+import {getGithubList} from '../store/github'
 import {Layout,List,} from 'antd'
 import LeftContainer from '../components/LeftContainer'
 import RightContainer from '../components/RightContainer'
 import { withRouter } from 'next/router'
-import { getGithubList } from '../lib/api'
-
+// import { getGithubList } from '../lib/api'
+// import {updatedGoldList} from '../store/github'
 
 const { Header, Content, Footer } = Layout
 const Index = (props) => { // {goldList, githubList, reduxStore}
+console.log(props)
 console.log(props.store.getState())
+  // console.log(githubList)
+  // props.store.dispatch(props.githubList)
+  // console.log(store)
+  // debugger
+  // console.log(store.dispatch)
+  // console.log(reduxStore)
+  // reduxStore.dispatch({type: 'INDEX/GITHUB',data: githubList})
+  // console.log(store.getState())
   // console.log(githubList)
   // console.log(store.github)
   // console.log(typeof props.router.components.get('/'))
@@ -29,9 +38,9 @@ console.log(props.store.getState())
   // console.log('props ==>',props.store.getState().github.githubList)
   return (
     <div className='root'>
-      {/* <LeftContainer goldList={goldList} reduxStore></LeftContainer> */}
+      <LeftContainer goldList={props.goldList} reduxStore></LeftContainer>
       {/* <div>dwqwd</div> */}
-      {/* <RightContainer  githubList={githubList}></RightContainer> */}
+      <RightContainer></RightContainer>
     {/* <List
         itemLayout="horizontal"
         dataSource={goldList}
@@ -130,7 +139,9 @@ console.log(props.store.getState())
   )
 }
 
-Index.getInitialProps = async ({ reduxStore }) => {
+Index.getInitialProps = async ({reduxStore}) => {
+  // console.log('props===>',props)
+  // const store = reduxStore
     let githubData = {
       category: "trending",
       period: "day",
@@ -138,27 +149,29 @@ Index.getInitialProps = async ({ reduxStore }) => {
       offset: 0,
       limit: 30
     }
+    console.log('reduxStore==>',reduxStore)
   if (!reduxStore.getState().gold.goldList.length && !reduxStore.getState().github.githubList.length) {
     const goldList = await reduxStore.dispatch(getGoldList())
-    const githubList = await getGithubList(githubData)
-    await reduxStore.dispatch({type: 'INDEX/GITHUB',data: githubList})
-    console.log(reduxStore.getState().github.githubList)
+    const githubList = await reduxStore.dispatch(getGithubList(githubData))
+    // const githubList = await getGithubList(githubData)
+    // await reduxStore.dispatch({type: 'INDEX/GITHUB',data: githubList})
+    // console.log(reduxStore.getState().github.githubList)
     // const githubList = await reduxStore.dispatch(getGithubList(githubData))
     console.log('index.js-----------')
-    // return {
-    //   goldList: goldList,
-    //   githubList: reduxStore.getState().github.githubList
-    // }
+    return {
+      goldList: goldList,
+      githubList: githubList
+    }
   }
 }
 
-export default withRouter(
-  connect(
-  state => ({
-    goldList: state.gold.goldList,
-    githubList: state.github.githubList
-  })
-)(Index))
+// export default withRouter(
+//   connect(
+//   state => ({
+//     goldList: state.gold.goldList,
+//     githubList: state.github.githubList
+//   })
+// )(Index))
 
 
 // export default
@@ -169,4 +182,4 @@ export default withRouter(
 //   })
 // )(Index)
 
-// export default Index
+export default Index

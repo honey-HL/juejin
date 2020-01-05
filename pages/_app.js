@@ -27,11 +27,12 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps, reduxStore } = this.props
+    console.log(reduxStore)
     return (
         <Layout>
           <Provider store={reduxStore}>
             {/* 把pageProps解构后传递给组件 */}
-            <Component store={reduxStore} {...pageProps} />
+            <Component  store={reduxStore} {...pageProps} />
           </Provider>
         </Layout>
     )

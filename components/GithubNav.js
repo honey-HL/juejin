@@ -1,6 +1,9 @@
 import React from 'react'
 import store from '../store/store'
-import { getGithubList}  from '../lib/api'
+// import { getGithubList}  from '../lib/api'
+import { connect } from 'react-redux'
+import { withRouter } from 'next/router'
+import  { getGithubList }  from '../store/github'
 
 const categoryList = [{
     id: 1,
@@ -13,6 +16,7 @@ const categoryList = [{
 }]
 
 const changeCategory = (item) => {
+    console.log(getGithubList)
     let githubData = {
         category: item.category,
         period: "day",
@@ -23,7 +27,7 @@ const changeCategory = (item) => {
     getGithubList(githubData)
 }
 
-const GithubNav = ({reduxStore}) => {
+const GithubNav = () => {
     
     return (
         <div className='source-navbar'>
