@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import store from '../store/store'
 // import { getGithubList}  from '../lib/api'
 import { connect } from 'react-redux'
@@ -15,10 +15,8 @@ const categoryList = [{
     category: "upcome"
 }]
 
-
-
-const changeCategory = (item, props) => {
-    console.log(props)
+const changeCategory = (item, store) => {
+    console.log(store)
     let githubData = {
         category: item.category,
         period: "day",
@@ -26,12 +24,14 @@ const changeCategory = (item, props) => {
         offset: 0,
         limit: 30
     }
-    props.dispatch(getGithubList(githubData))
+    store.dispatch(getGithubList(githubData))
 }
 
 
 
-const GithubNav = (props) => {
+const GithubNav = (store) => {
+
+    const [isShowHotSelect, setHotShow] = useState(false)
     
     return (
         <div className='source-navbar'>
@@ -45,15 +45,15 @@ const GithubNav = (props) => {
                         </div>
                     </div>
                 </div>
-                <div className="list-selector category-selector">
+                <div onClick={() => setHotShow(true)} className="list-selector category-selector">
                     <div className="title">热门</div>
                     <div className="arrow-box">
                         <img src='arrow-down.png' className="arrow-down"/>
                     </div>
-                    <ul className="list">
+                    <ul style={{display: !isShowHotSelect ? 'none': 'block'}} className="list">
                         {
                             categoryList.map((item) => <li 
-                            onClick={e => changeCategory(item, props)}
+                            onClick={e => changeCategory(item, store)}
                             key ={item.id} className="item">
                                 <span className="title">{item.name}</span>
                         </li>)
@@ -217,5 +217,4 @@ const GithubNav = (props) => {
 // export default GithubNav
 
 
-export default withRouter(
-    connect()(GithubNav))
+export default withRouter(connect()(GithubNav))
