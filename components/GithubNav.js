@@ -27,7 +27,8 @@ const changeCategory = (item) => {
     getGithubList(githubData)
 }
 
-const GithubNav = () => {
+const GithubNav = (props) => {
+    console.log(props)
     
     return (
         <div className='source-navbar'>
@@ -210,4 +211,14 @@ const GithubNav = () => {
       </div>
     )    
 }
-export default GithubNav
+// export default GithubNav
+
+
+export default withRouter(
+    connect(
+    state => ({
+        githubList: state.github.githubList
+        // goldList: state.gold.goldList,
+        // getGithubList: state.github.getGithubList
+    })
+  )(GithubNav))

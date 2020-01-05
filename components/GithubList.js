@@ -184,10 +184,11 @@ const GithubList = (props) => {
 // export default GithubList
 
 
-export default withRouter(
+export default
     connect(
     state => ({
         goldList: state.gold.goldList,
         githubList: state.github.githubList
-    })
-  )(GithubList))
+    }),
+    // {getGithubList}
+  )(GithubList)
