@@ -1,16 +1,39 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux'
+import  { getGoldList }  from '../store/gold'
 
-const GoldList = ({ goldList }) => {
-    // console.log('store==>', reduxStore)
-    // console.log('store==>gold',reduxStore.getState())
-    console.log('掘金列表页面 goldList==>',goldList)
+
+
+const GoldList = (store) => {
+
+  const [offset, setOffset] = useState(30)
+
+  let _container;
+
+  const _onScrollEvent = (e, _container) => {
+    console.log(_container.scrollHeight)
+    console.log(_container.scrollTop + _container.clientHeight)
+    console.log(_container.scrollTop)
+    if (_container.scrollTop + _container.clientHeight  + 1 === _container.scrollHeight) {
+      console.log('come on')
+      setOffset(offset + 30)
+      let goldData = {
+        category: "frontend",
+        order: "heat",
+        offset: offset,
+        limit: 30
+      }
+      store.dispatch(getGoldList(goldData))
+    }
+  }
+
     return (
   
-        <div className="gold-scroll-container">
-            <ul className="list">
+        <div onScroll={(e) => _onScrollEvent(e, _container)} ref={c => _container = c} className="gold-scroll-container">
+            <ul 
+            className="list">
                 {
-                    goldList.map((item, index) => <li key={index} className="item">
+                    store.goldList.map((item, index) => <li key={index} className="item">
                         <a href={item.url} className="item-content" target="_blank">
                             <div className="badge" title={`已有${item.collectionCount}人喜欢`}>
                                 <div className="icon ion-arrow-up-b"></div>
