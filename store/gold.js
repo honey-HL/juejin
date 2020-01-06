@@ -7,9 +7,9 @@ const GET_LIST = 'INDEX/GOLD';
 
 
 // actionCreator
-const updatedGoldList = data => ({
+const updatedGoldList = obj => ({
     type: GET_LIST,
-    data
+    ...obj
 })
 
 
@@ -17,11 +17,20 @@ export const getGoldList = postData => { // https://extension-ms.juejin.im/resou
     return (dispatch, getState, $axios) => { // https://api.tvmaze.com/search/shows?q=batman
         return axios.post('http://localhost:3008/api/resources/gold', postData)
         .then(res => {
-            const old_data = getState().gold.goldList;
-            const data = res.data.data;
-            console.log(`Show data fetched. Count: ${data.length}`);
-            const goldList = old_data.concat(data)
-            dispatch(updatedGoldList(goldList))
+                const data = res.data.data;
+                console.log(`Show data fetched. Count: ${data.length}`);
+                let goldList;
+                if (postData.order === 'time' && postData.offset === 0) { // 点的最新
+                    goldList = data
+                } else {
+                    const old_data = getState().gold.goldList;
+                    goldList = old_data.concat(data)
+                }
+                let obj = {
+                    goldList: goldList,
+                    requestPayload: postData
+                }
+                dispatch(updatedGoldList(obj))
             return goldList
         })
     }
@@ -30,6 +39,7 @@ export const getGoldList = postData => { // https://extension-ms.juejin.im/resou
 
 const defaultState = {
     goldList: [],
+    requestPayload: {}
 }
 
 
@@ -38,7 +48,8 @@ export default (state = defaultState, action) => {
         case GET_LIST:
             const newState = {
                 ...state,
-                goldList: action.data
+                requestPayload: action.requestPayload,
+                goldList: action.goldList
             }
             return newState
         default:

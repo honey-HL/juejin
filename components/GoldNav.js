@@ -2,10 +2,23 @@ import React from 'react'
 import Link from 'next/link'
 import { connect } from 'react-redux'
 import { withRouter } from 'next/router'
+import  { getGoldList }  from '../store/gold'
 
 
-const GoldNav = (props) => {
-    console.log(props)
+const GoldNav = (store) => {
+    console.log(store)
+
+    const orderByTime = () => {
+        const {requestPayload} = store
+        let goldData = {
+            category: requestPayload.category,
+            order: "time",
+            offset: 0,
+            limit: 30
+          }
+        store.dispatch(getGoldList(goldData))
+    }
+
     return (
         <div className='source-navbar'>
             <div className="source-selector">
@@ -31,7 +44,7 @@ const GoldNav = (props) => {
             </div>
             <div className="order-selector">
                 <div className="hottest active">热门</div>
-                <div className="latest">最新</div>
+                <div onClick={e => orderByTime()} className="latest">最新</div>
             </div>
            
         <style jsx global>{`
@@ -127,10 +140,8 @@ const GoldNav = (props) => {
 }
 // export default GoldNav
 
-export default withRouter(
-    connect(
-    // state => ({
-    //     goldList: state.gold.goldList,
-    //     githubList: state.github.githubList
-    // })
-  )(GoldNav))
+export default withRouter(connect(
+    state => ({
+        requestPayload: state.gold.requestPayload,
+      }),
+)(GoldNav))

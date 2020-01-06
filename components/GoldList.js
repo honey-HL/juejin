@@ -3,27 +3,41 @@ import { connect } from 'react-redux'
 import  { getGoldList }  from '../store/gold'
 
 
-
+var _container;
 const GoldList = (store) => {
 
-  const [offset, setOffset] = useState(30)
-
-  let _container;
+  console.log(store)
+  let top = false;
+  const {requestPayload} = store
+  const [offset, setOffset] = useState(!top? 30 : 0)
+  if (requestPayload.order === 'time'&& requestPayload.offset === 0) {
+    console.log(_container)
+    _container.scrollTop = 0
+    top = true
+    // setOffset(0)
+  }
 
   const _onScrollEvent = (e, _container) => {
+    const {requestPayload} = store
     console.log(_container.scrollHeight)
     console.log(_container.scrollTop + _container.clientHeight)
     console.log(_container.scrollTop)
     if (_container.scrollTop + _container.clientHeight  + 1 >= _container.scrollHeight) {
       console.log('come on')
-      setOffset(offset + 30)
+      if (!top) {
+        setOffset(offset + 30)
+      }
+      console.log('offset==>',offset)
       let goldData = {
-        category: "frontend",
-        order: "heat",
-        offset: offset,
+        category: requestPayload.category,
+        order: requestPayload.order,
+        offset: top ? requestPayload.offset : offset,
         limit: 30
       }
       store.dispatch(getGoldList(goldData))
+      if (top) {
+        top = false
+      }
     }
   }
 
@@ -167,7 +181,8 @@ const GoldList = (store) => {
 export default
     connect(
     state => ({
-        goldList: state.gold.goldList,
+      requestPayload: state.gold.requestPayload,
+      goldList: state.gold.goldList,
     }),
   )(GoldList)
 
