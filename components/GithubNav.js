@@ -27,14 +27,18 @@ const changeCategory = (item, store) => {
     store.dispatch(getGithubList(githubData))
 }
 
-
-
 const GithubNav = (store) => {
+
+    const handleGlobal = (e) => {
+        if (isShowHotSelect) {
+            setHotShow(false)
+        }
+    }
 
     const [isShowHotSelect, setHotShow] = useState(false)
     
     return (
-        <div className='source-navbar'>
+        <div onClick={e => handleGlobal(e)} className='source-navbar'>
             <div className="source-box">
                 <div className="source-selector multiple">
                     <div className="curr">
