@@ -5,14 +5,32 @@ import { withRouter } from 'next/router'
 import  { getGoldList }  from '../store/gold'
 
 
+var orderList = [{
+    title: '热门',
+    active: true,
+    order: "heat",
+    class:"hottest"
+}, {
+    title: '最新',
+    active: false,
+    order: "time",
+    class:"latest"
+}]
+
 const GoldNav = (store) => {
     console.log(store)
 
-    const orderByTime = () => {
+    const orderByTime = (item) => {
+        orderList.map(ord => {
+            ord.active = false
+            if ( item.order === ord.order) {
+                ord.active = true
+            }
+        })
         const {requestPayload} = store
         let goldData = {
             category: requestPayload.category,
-            order: "time",
+            order: item.order,
             offset: 0,
             limit: 30
           }
@@ -43,22 +61,21 @@ const GoldNav = (store) => {
                 </div>
             </div>
             <div className="order-selector">
-                <div className="hottest active">热门</div>
-                <div onClick={e => orderByTime()} className="latest">最新</div>
+                {
+                    orderList.map((item, idx) => 
+                        <div key={idx} onClick={e => orderByTime(item)} className={`${item.active?'active':''} ${item.class}`}>{item.title}</div>
+                    )
+                }
+                {/* <div className="hottest active">热门</div>
+                <div onClick={e => orderByTime()} className="latest">最新</div> */}
             </div>
            
         <style jsx global>{`
-        .hottest, .latest {
-            display: inline-block;
-            margin: 0 .1rem;
-            width: 3.6rem;
-            height: 3.5rem;
-            font-size: 1.25rem;
-            text-align: center;
-            line-height: 3.5rem;
-            color: #646c7b;
-            opacity: .3;
-            cursor: pointer;
+        .latest.active:hover, .latest:hover {
+            opacity: 1;
+        }
+        .hottest.active:hover, .hottest:hover, .latest.active:hover, .latest:hover {
+            opacity: 1;
         }
         .hottest, .latest {
             display: inline-block;
@@ -72,7 +89,19 @@ const GoldNav = (store) => {
             opacity: .3;
             cursor: pointer;
         }
-        .hottest.active {
+        .hottest, .latest {
+            display: inline-block;
+            margin: 0 .1rem;
+            width: 3.6rem;
+            height: 3.5rem;
+            font-size: 1.25rem;
+            text-align: center;
+            line-height: 3.5rem;
+            color: #646c7b;
+            opacity: .3;
+            cursor: pointer;
+        }
+        .hottest.active, .latest.active {
             opacity: .8;
         }
         .source-navbar .order-selector {

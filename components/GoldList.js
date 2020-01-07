@@ -4,6 +4,7 @@ import  { getGoldList }  from '../store/gold'
 
 
 var _container;
+var num = 0;
 const GoldList = (store) => {
 
   console.log(store)
@@ -13,7 +14,8 @@ const GoldList = (store) => {
   if (requestPayload.order === 'time'&& requestPayload.offset === 0) {
     console.log(_container)
     _container.scrollTop = 0
-    top = true
+    num = 0;
+    // top = true
     // setOffset(0)
   }
 
@@ -24,20 +26,22 @@ const GoldList = (store) => {
     console.log(_container.scrollTop)
     if (_container.scrollTop + _container.clientHeight  + 1 >= _container.scrollHeight) {
       console.log('come on')
-      if (!top) {
-        setOffset(offset + 30)
-      }
-      console.log('offset==>',offset)
+      // if (!top) {
+      //   setOffset(offset + 30)
+      // }
+      // console.log('offset==>',offset)
+      num = num + 30;
       let goldData = {
         category: requestPayload.category,
         order: requestPayload.order,
-        offset: top ? requestPayload.offset : offset,
+        offset: num,
+        // offset: top ? requestPayload.offset : offset,
         limit: 30
       }
       store.dispatch(getGoldList(goldData))
-      if (top) {
-        top = false
-      }
+      // if (top) {
+      //   top = false
+      // }
     }
   }
 
