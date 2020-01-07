@@ -1,4 +1,6 @@
 const withCss = require('@zeit/next-css')
+const withSass = require('@zeit/next-sass')
+const withLess = require('@zeit/next-less')
 
 const configs = {
   // 输出目录
@@ -47,6 +49,15 @@ const configs = {
   publicRuntimeConfig: {
     staticFolder: '/static',
   },
+   // postcss支持
+  postcssLoaderOptions: {
+    parser: true,
+    config: {
+      ctx: {
+        theme: JSON.stringify(process.env.REACT_APP_THEME)
+      }
+    }
+  }
 }
 
 if (typeof require !== 'undefined') {
@@ -54,4 +65,5 @@ if (typeof require !== 'undefined') {
 }
 
 // withCss得到的是一个nextjs的config配置
-module.exports = withCss(configs)
+// module.exports = withCss(configs)
+module.exports = withCss(withLess(withSass(configs)))

@@ -1,37 +1,12 @@
 import React,{useState, useEffect} from 'react'
-import store from '../store/store'
-// import { getGithubList}  from '../lib/api'
 import { connect } from 'react-redux'
 import { withRouter } from 'next/router'
 import  { getGithubList }  from '../store/github'
+import './style/dropdown.scss'
+import { periodList, githubCategoryList } from "../util/dropdown_config";
 
-const categoryList = [{
-    id: 1,
-    category: "trending",
-    name: '热门'
-}, {
-    id:2,
-    name: '新生',
-    category: "upcome"
-}]
 
-const periodList = [
-    {
-        id: 1,
-        period: "day",
-        name: '今日'
-    },
-    {
-        id: 2,
-        period: "week",
-        name: '本周'
-    },
-    {
-        id: 3,
-        period: "month",
-        name: '本月'
-    }
-]
+
 
 let categoryName = '热门'
 let periodName = '今日'
@@ -94,7 +69,7 @@ const GithubNav = (store) => {
                     </div>
                     <ul style={{display: !isShowHotSelect ? 'none': 'block'}} className="list">
                         {
-                            categoryList.map((item) => <li 
+                            githubCategoryList.map((item) => <li 
                             onClick={e => changeCategory(item, store)}
                             key ={item.id} className="item">
                                 <span className="title">{item.name}</span>
@@ -127,48 +102,6 @@ const GithubNav = (store) => {
                 </div>
            </div>
         <style jsx>{`
-        }
-        .list-selector .title {
-            -ms-flex-positive: 1;
-            flex-grow: 1;
-            margin: 0 0 0 1rem;
-            opacity: .8;
-        }
-        .list-selector .list .item:hover {
-            background:#3281f7;
-            color:#fff;
-            opacity: 1;
-        }
-        .list-selector .list .item .title {
-            margin: 0 0 0 1rem;
-        }
-        .list-selector.active .title {
-            opacity: 1;
-        }
-        .list-selector .list .item{
-            display: -ms-flexbox;
-            display: flex;
-            -ms-flex-align: center;
-            align-items: center;
-            height: 2.5rem;
-        }
-        .list-selector.active .list{
-            display: block;
-        }
-        .list-selector .list{
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background-color: #f8f9fb;
-            box-shadow: 0 1px 2px 0 rgba(34,42,48,.1);
-            border-bottom-left-radius: 2px;
-            border-bottom-right-radius: 2px;
-            z-index: 750;
-            overflow: hidden;
-            padding-left:0;
-            display: block;
-        }
         .lang-selector{
             -ms-flex: 0 0 auto;
             flex: 0 0 auto;

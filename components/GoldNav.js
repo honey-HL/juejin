@@ -1,24 +1,28 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import Link from 'next/link'
 import { connect } from 'react-redux'
 import { withRouter } from 'next/router'
 import  { getGoldList }  from '../store/gold'
+import { goldCategoryList, orderList } from "../util/dropdown_config";
+import './style/dropdown.scss'
 
 
-var orderList = [{
-    title: '热门',
-    active: true,
-    order: "heat",
-    class:"hottest"
-}, {
-    title: '最新',
-    active: false,
-    order: "time",
-    class:"latest"
-}]
-
+let categoryName = '前端'
 const GoldNav = (store) => {
+
+    const {requestPayload} = store
     console.log(store)
+
+    const changeCategory = (item, store) => {
+        categoryName = item.name
+        let goldData = {
+            category: item.category,
+            order: requestPayload.order,
+            offset: 0,
+            limit: 30
+        }
+        store.dispatch(getGoldList(goldData))
+    }
 
     const orderByTime = (item) => {
         orderList.map(ord => {
@@ -27,7 +31,6 @@ const GoldNav = (store) => {
                 ord.active = true
             }
         })
-        const {requestPayload} = store
         let goldData = {
             category: requestPayload.category,
             order: item.order,
@@ -37,8 +40,16 @@ const GoldNav = (store) => {
         store.dispatch(getGoldList(goldData))
     }
 
+    const [showCategorySelect, setCategorySelect] = useState(false)
+
+    const handleGlobal = (e) => {
+        if (showCategorySelect) {
+            setCategorySelect(false)
+        }
+    }
+
     return (
-        <div className='source-navbar'>
+        <div onClick={e => handleGlobal(e)} className='source-navbar'>
             <div className="source-selector">
                 <div className="curr">
                     <img className="icon source-icon" src="jj.svg"/>
@@ -52,12 +63,21 @@ const GoldNav = (store) => {
                     </li>
                 </ul> */}
             </div>
-            <div className="category-box">
+            <div onClick={() => setCategorySelect(true)} className="category-box">
                 <div className="category-selector">
-                    <div className="title">前端</div>
+                    <div className="title">{categoryName}</div>
                     <div className="arrow-box">
                         <img src='arrow-down.png' className="arrow-down"/>
                     </div>
+                    <ul style={{display: !showCategorySelect ? 'none': 'block'}} className="list">
+                        {
+                            goldCategoryList.map((item, id) => <li 
+                            onClick={e => changeCategory(item, store)}
+                            key ={id} className="item">
+                                <span className="title">{item.name}</span>
+                        </li>)
+                        }
+                    </ul>
                 </div>
             </div>
             <div className="order-selector">
