@@ -15,13 +15,43 @@ const categoryList = [{
     category: "upcome"
 }]
 
+const periodList = [
+    {
+        id: 1,
+        period: "day",
+        name: '今日'
+    },
+    {
+        id: 2,
+        period: "week",
+        name: '本周'
+    },
+    {
+        id: 3,
+        period: "month",
+        name: '本月'
+    }
+]
+
 let categoryName = '热门'
+let periodName = '今日'
 const GithubNav = (store) => {
 
     const {requestPayload} = store
 
+    const changePeriod = (item, store) => {
+        periodName = item.name;
+        let githubData = {
+            category: requestPayload.category,
+            period: item.period,
+            lang: requestPayload.lang,
+            offset: 0,
+            limit: requestPayload.limit
+        }
+        store.dispatch(getGithubList(githubData))
+    }
+
     const changeCategory = (item, store) => {
-        console.log(store)
         categoryName = item.name;
         let githubData = {
             category: item.category,
@@ -37,9 +67,13 @@ const GithubNav = (store) => {
         if (isShowHotSelect) {
             setHotShow(false)
         }
+        if (showPeriodSelect) {
+            setPeriodSelect(false)
+        }
     }
 
     const [isShowHotSelect, setHotShow] = useState(false)
+    const [showPeriodSelect, setPeriodSelect] = useState(false)
     
     return (
         <div onClick={e => handleGlobal(e)} className='source-navbar'>
@@ -66,14 +100,22 @@ const GithubNav = (store) => {
                                 <span className="title">{item.name}</span>
                         </li>)
                         }
-                        
                     </ul>
                 </div>
-                <div className="list-selector period-selector">
-                    <div className="title">今日</div>
+                <div onClick={() => setPeriodSelect(true)} className="list-selector period-selector">
+                    <div className="title">{periodName}</div>
                     <div className="arrow-box">
                         <img src='arrow-down.png' className="arrow-down"/>
                     </div>
+                    <ul style={{display: !showPeriodSelect ? 'none': 'block'}} className="list">
+                        {
+                            periodList.map((item) => <li 
+                            onClick={e => changePeriod(item, store)}
+                            key ={item.id} className="item">
+                                <span className="title">{item.name}</span>
+                        </li>)
+                        }
+                    </ul>
                 </div>
             </div>
            <div className="lang-selector">
