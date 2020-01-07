@@ -6,14 +6,13 @@ import  { getGoldList }  from '../store/gold'
 var _container;
 var num = 0;
 const GoldList = (store) => {
-
+  // let top = false;
+  // const [offset, setOffset] = useState(!top? 30 : 0)
   console.log(store)
-  let top = false;
   const {requestPayload} = store
-  const [offset, setOffset] = useState(!top? 30 : 0)
-  if (requestPayload.order === 'time'&& requestPayload.offset === 0) {
+  if ((requestPayload.order === 'time' || requestPayload.order === 'heat') && requestPayload.offset === 0) {
     console.log(_container)
-    _container.scrollTop = 0
+    _container && (_container.scrollTop = 0)
     num = 0;
     // top = true
     // setOffset(0)

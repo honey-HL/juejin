@@ -20,7 +20,7 @@ export const getGoldList = postData => { // https://extension-ms.juejin.im/resou
                 const data = res.data.data;
                 console.log(`Show data fetched. Count: ${data.length}`);
                 let goldList;
-                if ((postData.order === 'time' && postData.offset === 0) || postData.order === "heat" && postData.offset === 0) { // 点的最新
+                if ((postData.order === 'time' || postData.order === "heat") && postData.offset === 0) { // 点 最新 热门
                     goldList = data
                 } else {
                     const old_data = getState().gold.goldList;
