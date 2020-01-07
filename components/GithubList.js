@@ -145,9 +145,14 @@ const GithubList = (props) => {
             border-radius: 2px;
             background-color: #fff;
         }
+        @media screen and (max-width: 1300px) {
+          .list .item-row {
+            min-width: 98%;
+          }
+        }
           @media (min-width: 1300px) {
             .list .item-row {
-                width: calc((100% - 1.6rem * 1) / 2);
+                min-width: calc((100% - 1.6rem * 1) / 2);
             }
           }
          
@@ -173,7 +178,7 @@ const GithubList = (props) => {
                 top: 54px;
                 bottom: 0;
                 overflow: auto;
-                width:inherit;
+                width:100%;
             }
           `}</style>
         </div>
