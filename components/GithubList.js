@@ -1,29 +1,40 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {getGoldList} from '../store/gold'
+import {getGithubList} from '../store/github'
 import store from '../store/store'
 import { withRouter } from 'next/router'
 
-const GithubList = (props) => {
-    console.log(props)
-    // console.log(props.dispatch(updatedGoldList([{name: 'dwd'}])))
-    // console.log('store in githublist', store.getState())
-    // console.log('reduxStore==>', reduxStore)
-    // console.log('props ==>',props.)
-//     let githubList = []
-//   for (let i in props.router.components) {
-//     if (i === '/') {
-//         githubList = props.router.components[i].props.initialReduxState.github.githubList
-//     }
-//     console.log(githubList)
-//     console.log(props.router.components[i])
-//   }
+
+var _container;
+var num = 0;
+const GithubList = (store) => {
+    console.log(store)
+
+    const _onScrollEvent = (e, _container) => {
+      const {requestPayload} = store
+      console.log(_container.scrollHeight)
+      console.log(_container.scrollTop + _container.clientHeight)
+      console.log(_container.scrollTop)
+      if (_container.scrollTop + _container.clientHeight  + 1 >= _container.scrollHeight) {
+        console.log('come on')
+        num = num + 30;
+        let githubData = {
+          category: requestPayload.category,
+          period: requestPayload.period,
+          lang:  requestPayload.lang,
+          offset: num,
+          limit: 30
+        }
+        store.dispatch(getGithubList(githubData))
+      }
+    }
+   
     return (
   
-        <div className="github-scroll-container">
+        <div onScroll={(e) => _onScrollEvent(e, _container)} ref={c => _container = c} className="github-scroll-container">
             <ul className="list github-filled">
                 {
-                    props.githubList.map((item, index) => <li key={index} className="item-row">
+                    store.githubList.map((item, index) => <li key={index} className="item-row">
 
                        <div className="item-box">
                            <div className="item">
@@ -192,8 +203,8 @@ const GithubList = (props) => {
 export default
     connect(
     state => ({
-        goldList: state.gold.goldList,
-        githubList: state.github.githubList
+      requestPayload: state.github.requestPayload,
+      githubList: state.github.githubList
     }),
     // {getGithubList}
   )(GithubList)
