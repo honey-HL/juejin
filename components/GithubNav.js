@@ -15,12 +15,14 @@ const categoryList = [{
     category: "upcome"
 }]
 
+let categoryName = '热门'
 const GithubNav = (store) => {
 
     const {requestPayload} = store
 
     const changeCategory = (item, store) => {
         console.log(store)
+        categoryName = item.name;
         let githubData = {
             category: item.category,
             period: requestPayload.period,
@@ -52,7 +54,7 @@ const GithubNav = (store) => {
                     </div>
                 </div>
                 <div onClick={() => setHotShow(true)} className="list-selector category-selector">
-                    <div className="title">热门</div>
+                    <div className="title">{categoryName}</div>
                     <div className="arrow-box">
                         <img src='arrow-down.png' className="arrow-down"/>
                     </div>
