@@ -15,19 +15,21 @@ const categoryList = [{
     category: "upcome"
 }]
 
-const changeCategory = (item, store) => {
-    console.log(store)
-    let githubData = {
-        category: item.category,
-        period: "day",
-        lang: "javascript",
-        offset: 0,
-        limit: 30
-    }
-    store.dispatch(getGithubList(githubData))
-}
-
 const GithubNav = (store) => {
+
+    const {requestPayload} = store
+
+    const changeCategory = (item, store) => {
+        console.log(store)
+        let githubData = {
+            category: item.category,
+            period: requestPayload.period,
+            lang: requestPayload.lang,
+            offset: 0,
+            limit: requestPayload.limit
+        }
+        store.dispatch(getGithubList(githubData))
+    }
 
     const handleGlobal = (e) => {
         if (isShowHotSelect) {
@@ -221,4 +223,8 @@ const GithubNav = (store) => {
 // export default GithubNav
 
 
-export default withRouter(connect()(GithubNav))
+export default withRouter(connect(
+    state => ({
+        requestPayload: state.github.requestPayload,
+      }),
+)(GithubNav))

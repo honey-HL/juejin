@@ -8,15 +8,20 @@ import { withRouter } from 'next/router'
 var _container;
 var num = 0;
 const GithubList = (store) => {
-    console.log(store)
+
+  const {requestPayload} = store
+
+    if ((
+        requestPayload.category === "upcome" || 
+        requestPayload.category === "trending"
+      ) 
+    && requestPayload.offset === 0) {
+      _container && (_container.scrollTop = 0)
+      num = 0;
+    }
 
     const _onScrollEvent = (e, _container) => {
-      const {requestPayload} = store
-      console.log(_container.scrollHeight)
-      console.log(_container.scrollTop + _container.clientHeight)
-      console.log(_container.scrollTop)
       if (_container.scrollTop + _container.clientHeight  + 1 >= _container.scrollHeight) {
-        console.log('come on')
         num = num + 30;
         let githubData = {
           category: requestPayload.category,
