@@ -52,7 +52,7 @@ const GoldNav = (store) => {
         <div onClick={e => handleGlobal(e)} className='source-navbar'>
             <div className="source-selector">
                 <div className="curr">
-                    <img className="icon source-icon" src="jj.svg"/>
+                    <img className="source-icon" src="jj.svg"/>
                     <div className="title" style={{color: 'rgb(4, 74, 171)',}}>掘金</div>
                     <div className="arrow" ></div>
                 </div>
@@ -91,6 +91,9 @@ const GoldNav = (store) => {
             </div>
            
         <style jsx global>{`
+        .source-icon{
+            margin: 0 1rem 0 .4rem;
+        }
         .latest.active:hover, .latest:hover {
             opacity: 1;
         }

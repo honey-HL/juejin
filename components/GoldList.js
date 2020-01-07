@@ -53,7 +53,9 @@ const GoldList = (store) => {
                     store.goldList.map((item, index) => <li key={index} className="item">
                         <a href={item.url} className="item-content" target="_blank">
                             <div className="badge" title={`已有${item.collectionCount}人喜欢`}>
-                                <div className="icon ion-arrow-up-b"></div>
+                            <svg className="icon" aria-hidden="true">
+                                    <use xlinkHref="#icon-top-s"></use>
+                                  </svg>
                                 <div className="text">{item.collectionCount}</div>
                             </div>
                             <div className="entry-info">

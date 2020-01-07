@@ -59,10 +59,16 @@ const GithubList = (store) => {
                                    </div>
                                    <div className="repo-meta">
                                         <span className="star">
-                                            <i className="icon ion-android-star"></i>{item.starCount}
+                                          <svg className="icon" aria-hidden="true">
+                                            <use xlinkHref="#icon-wujiaoxing"></use>
+                                          </svg>
+                                          {item.starCount}
                                         </span>
                                         <span className="fork">
-                                            <i className="icon ion-fork-repo"></i> {item.forkCount}
+                                          <svg className="icon" aria-hidden="true">
+                                            <use xlinkHref="#icon-forkrepo"></use>
+                                          </svg>
+                                          {item.forkCount}
                                         </span>
                                         <span className="lang">
                                             <i className="icon lang-color" style={{backgroundColor: 'rgb(241, 224, 90)'}}></i>

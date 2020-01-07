@@ -21,8 +21,16 @@ const Index = (props) => { // {goldList, githubList, reduxStore}
               //  console.log(document.getElementsByClassName('list-container')[0])
              }
           </script>
+          <script src="iconfont.js"></script>
       <style jsx global>
         {`
+        .icon {
+          width: 1em;
+          height: 1em;
+          vertical-align: -0.15em;
+          fill: currentColor;
+          overflow: hidden;
+        }
         .source {
           position: relative;
           display: -ms-flexbox;
