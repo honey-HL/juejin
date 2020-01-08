@@ -53,10 +53,10 @@ const GoldList = (store) => {
                     store.goldList.map((item, index) => <li key={index} className="item">
                         <a href={item.url} className="item-content" target="_blank">
                             <div className="badge" title={`已有${item.collectionCount}人喜欢`}>
-                            <svg className="icon" aria-hidden="true">
+                            <svg className="icon triangle" aria-hidden="true">
                                     <use xlinkHref="#icon-top-s"></use>
                                   </svg>
-                                <div className="text">{item.collectionCount}</div>
+                                <div className="text collection">{item.collectionCount}</div>
                             </div>
                             <div className="entry-info">
                                 <div className="title" title={item.title}>{item.title}</div>
@@ -77,6 +77,9 @@ const GoldList = (store) => {
             </ul>
 
           <style jsx>{`
+          .triangle {
+            font-size: 12px !important;
+          }
           .item .badge .text {
             font-family: Helvetica Neue;
             font-size: 1rem;
@@ -176,6 +179,15 @@ const GoldList = (store) => {
               overflow: auto;
               width:inherit;
               padding-right: .8rem;
+          }
+          .list .item:hover .triangle {
+            color:#007fff;
+          }
+          .list .item:hover .badge {
+            background-color:#eaf1fe;
+          }
+          .list .item:hover .collection {
+            color:#007fff;
           }
           `}</style>
         </div>
