@@ -55,7 +55,7 @@ const GithubNav = (store) => {
             <div className="source-box">
                 <div className="source-selector multiple">
                     <div className="curr">
-                        <img className="icon source-icon" src="https://e-gold-cdn.xitu.io/static/github.png?9140c37"/>
+                        <img className="icontu source-icon" src="https://e-gold-cdn.xitu.io/static/github.png?9140c37"/>
                         <div className="title" style={{color: 'rgb(0, 0, 0)'}}>GitHub</div>
                         <div className="arrow-box">
                             <img src='arrow-down.png' className="arrow-down"/>
@@ -137,7 +137,7 @@ const GithubNav = (store) => {
             background-color: #f8f9fb;
             cursor: pointer;
         }
-        .icon {
+        .icontu {
             margin: 0 1rem 0 .4rem;
         }
         .source-icon {

@@ -18,7 +18,7 @@ const HeaderContainer = () => (
         </div>
         <div className="channel-seletor">
             <div className="curr">
-                <img className="icon" src="https://e-gold-cdn.xitu.io/static/frontend.svg?cffd930"/>
+                <img className="icontu" src="https://e-gold-cdn.xitu.io/static/frontend.svg?cffd930"/>
                 <div className="title">前端</div>
                 <div className="arrow-box">
                     <img className='arrow-down' src='arrow-down.png' />
@@ -53,7 +53,7 @@ const HeaderContainer = () => (
                 </div>
 
                 <div className="app-menu">
-                    <div className="icon"></div>
+                    <div className="icontu"></div>
                 </div>
         
         <style jsx global>{`
@@ -65,7 +65,7 @@ const HeaderContainer = () => (
             color: #007fff;
             white-space: nowrap;
         }
-        .channel-seletor .icon {
+        .channel-seletor .icontu{
             margin-left: 1rem;
             width: 2.25rem;
             height: 2.25rem;
@@ -77,7 +77,7 @@ const HeaderContainer = () => (
             justify-content: center;
             align-items: center;
         }
-        .app-menu .icon{
+        .app-menu .icontu{
             width: 1.66667rem;
             height: 1.66667rem;
             opacity: .8;

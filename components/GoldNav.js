@@ -157,7 +157,7 @@ const GoldNav = (store) => {
             -ms-flex-positive: 1;
             flex-grow: 1;
         }
-        .icon {
+        .icontu {
             margin: 0 1rem 0 .4rem;
         }
         .curr {
