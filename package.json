@@ -20,7 +20,7 @@
     "koa-server-http-proxy": "^0.1.0",
     "koa2-proxy-middleware": "^0.0.4",
     "less": "^3.10.3",
-    "next": "9.1.6",
+    "next": "9.5.5",
     "node-sass": "^4.13.0",
     "react": "^16.12.0",
     "react-dom": "16.12.0",
